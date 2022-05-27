@@ -1,0 +1,71 @@
+.header-bg{
+    background-color:#E9D5DA;
+}
+
+
+
+.text-h1{
+    color: #827397;
+}
+
+.menu-icon{
+    font-size: 4em;
+    color: #363062;
+}
+
+.basket-icon{
+    font-size: 2.5em;
+    color: #363062;
+}
+
+
+.footer-p{
+    font-size: 1.4rem;
+}
+#headerimg{
+    margin-top: 13%;
+}
+
+/* ////////////slide show ///////// */
+.carousel{
+    width: 80%;
+    height: 60%;
+    margin: auto;
+}
+/* .card-body a{
+    font-size: 25px;
+} */
+.prodheigh img{
+    height: 35vh;
+}
+.aboutheight img{
+    height: 350px;
+}
+
+.right_header_info ul li a {
+    font-weight: 600;
+
+}
+.right_header_info {
+    margin-top: 2em;
+}
+
+.hr-theme-slash-2 {
+    display: flex;
+}
+.hr-line {
+      width: 100%;
+      position: relative;
+      margin: 15px;
+      border-bottom: 1px solid #000;
+}
+.hr-icon {
+      position: relative;
+      top: 3px;
+      color: #363062;
+      font-size: 2em;
+}
+.form-row label{
+    color: #363062;
+    font-weight: 600;
+}
