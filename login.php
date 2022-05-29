@@ -1,51 +1,45 @@
-<?php 
+<?php
 include 'connect.php';
 session_start();
 // login Validation function 
 
 
 
-$le= $lp="none";
-$lpErr="";
-$login=mysqli_fetch_all(mysqli_query($conn,'select * from users'),MYSQLI_ASSOC);
+$le = $lp = "none";
+$lpErr = "";
+$login = mysqli_fetch_all(mysqli_query($conn, 'select * from users'), MYSQLI_ASSOC);
 
-if (isset($_POST['login'])) 
-{
+if (isset($_POST['login'])) {
 
-    $lemail=$_POST['email'];
-    $lpassword=$_POST['password'];
+    $lemail = $_POST['email'];
+    $lpassword = $_POST['password'];
     if (empty($_POST['email']) || empty($_POST['password'])) {
-        $lp="block";
-        $lpErr="please insert email and Password";
-    }
-    else 
-        {
-            foreach($login as $admin)
-            {
-                if ($admin['admin'] == 1 && $lemail == $admin['email'] && $lpassword == $admin['pass'])
-            {
-                $ldate=date("d-m-Y H:i:s");
-                $sql="INSERT INTO logins (updated_at) VALUE ('$ldate') WHERE users.fname='admin'";
-                mysqli_query($conn , $sql);
+        $lp = "block";
+        $lpErr = "please insert email and Password";
+    } else {
+        foreach ($login as $admin) {
+            if ($admin['admin'] == 1 && $lemail == $admin['email'] && $lpassword == $admin['pass']) {
+                $ldate = date("d-m-Y H:i:s");
+                $sql = "INSERT INTO logins (updated_at) VALUE ('$ldate') WHERE users.fname='admin'";
+                mysqli_query($conn, $sql);
                 header('location: admin.php');
-            }
-            else
-            {
-                $lp="block";
-                $lpErr="Wrong email or Password";
+            } else {
+                $lp = "block";
+                $lpErr = "You Are Not Admin";
             }
         }
     }
 }
 ?>
 <div class="hr-theme-slash-2">
-  <div class="hr-line"></div>
-  <div class="hr-icon"><i class="fa-solid fa-couch"></i></div>
-  <div class="hr-line"></div>
+    <div class="hr-line"></div>
+    <div class="hr-icon"><i class="fa-solid fa-couch"></i></div>
+    <div class="hr-line"></div>
 </div>
 <br>
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -53,12 +47,13 @@ if (isset($_POST['login']))
     <link rel="stylesheet" href="style.css">
     <title>login</title>
 </head>
+
 <body>
-    
 
-<!-- Log In form -->
 
-<!-- <form  action="login.php" method="POST" id="logForm">
+    <!-- Log In form -->
+
+    <!-- <form  action="login.php" method="POST" id="logForm">
 
     
         <h2 style="text-align:center; font-family: 'FontAwesome'; color:#363062;
@@ -86,13 +81,17 @@ if (isset($_POST['login']))
 
     <div class="loginBox"> <img class="user" src="https://i.ibb.co/yVGxFPR/2.png" height="100px" width="100px">
         <h3>Sign in here</h3>
-        <form action="login.php" method="post">
-            <div class="inputBox"> <input id="uname" type="text" name="email" placeholder="E-mail"> <input id="pass" type="password" name="password" placeholder="Password"> </div> 
-            <div class="invalid-feedback" style="display:<?php echo $lp ?>;color: #ff000c"><?php echo $lpErr ?></div> 
+        <form action="admin.php" method="post">
+            <div class="inputBox">
+                <input id="uname" type="text" name="email" placeholder="E-mail">
+                 <input id="pass" type="password" name="password" placeholder="Password">
+            </div>
+            <div class="invalid-feedback" style="display:<?php echo $lp ?>;color: #ff000c"><?php echo $lpErr ?></div>
             <input type="submit" name="login" value="Login">
-        </form>  
+        </form>
     </div>
 </body>
+
 </html>
 <!-- End Log In form -->
 
@@ -107,6 +106,6 @@ if (isset($_POST['login']))
 
 
 <br><br>
-<?php 
+<?php
 // require 'include/footer.php'; 
 ?>
