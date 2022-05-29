@@ -263,7 +263,7 @@ echo $newName;
                             <div class="col-lg-9">
                                 <div class="right_header_info">
                                     <ul>
-                                        <li style="display:<?php echo $uss; ?> ;"><a href="index.php"><i class="fa-solid fa-person-walking-arrow-right fa-lg basket-icon"></i></i></a>
+                                        <li style="display:<?php echo $uss; ?> ;"><a href="logout.php"><i class="fa-solid fa-person-walking-arrow-right fa-lg basket-icon"></i></i></a>
                                         </li>
 
                                         <!-- <li>
