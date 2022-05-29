@@ -144,16 +144,15 @@ if (isset($_POST['addUserSubmit'])) {
     }
     else{
 
-    
-    $newName=$_POST['userAddName'];
-    $newEmail=$_POST['userAddEmail'];
-    $newPhone=$_POST['userAddPhone'];
-    $newPass=$_POST['userAddPass'];
-    $creatat=date('d-m-Y');
-    $updateat=date('d-m-Y');
+        $newName=$_POST['userAddName'];
+        $newEmail=$_POST['userAddEmail'];
+        $newPhone=$_POST['userAddPhone'];
+        $newPass=$_POST['userAddPass'];
+        $creatat=date('d-m-Y');
+        $updateat=date('d-m-Y');
 
-$sql="INSERT INTO users (fname,email,phone,Pass) VALUES ('$newName','$newEmail','$newPhone','$newPass');";
-mysqli_query($conn,$sql);
+        $sql="INSERT INTO users (fname,email,phone,Pass) VALUES ('$newName','$newEmail','$newPhone','$newPass');";
+        mysqli_query($conn,$sql);
       }
 }
 
