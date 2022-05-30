@@ -22,6 +22,7 @@ if (isset($_POST['login'])) {
                 $ldate = date("d-m-Y H:i:s");
                 $sql = "INSERT INTO logins (updated_at) VALUE ('$ldate') WHERE users.fname='admin'";
                 mysqli_query($conn, $sql);
+                $_SESSION['admin_name']=$admin['fname'];
                 header('location: admin.php');
             } else {
                 $lp = "block";
@@ -81,7 +82,7 @@ if (isset($_POST['login'])) {
 
     <div class="loginBox"> <img class="user" src="https://i.ibb.co/yVGxFPR/2.png" height="100px" width="100px">
         <h3>Sign in here</h3>
-        <form action="admin.php" method="post">
+        <form action="login.php" method="post">
             <div class="inputBox">
                 <input id="uname" type="text" name="email" placeholder="E-mail">
                  <input id="pass" type="password" name="password" placeholder="Password">

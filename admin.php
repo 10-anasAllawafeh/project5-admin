@@ -1,5 +1,10 @@
 <?php
 include 'connect.php';
+session_start();
+$user=$_SESSION['admin_name'];
+if (empty($user)) {
+    header('location: login.php');
+}
 
 //call the user information from database
 $users=mysqli_fetch_all(mysqli_query($conn,'select * from users'),MYSQLI_ASSOC);
@@ -292,17 +297,7 @@ echo $newName;
 <!-- ////////////////////chooose table function//////////////// -->
 <!-- //////////////////////////////////////////////// -->
 
-<div class="col-md-12 col-lg-12 col-xl-12 offset-md-3">
-    <form action="admin.php" method="POST" >
-        <select name="tables" class="form-control col-4" id="" style="height:10vh ; display: inline-block; ">
-            <option value="usersTable">Users Table</option>
-            <option value="productsTable">Products Table</option>
-            <option value="categoriesTable">Categories Table</option>
-            <option value="salesTable">Sales Table</option>
-        </select>
-        <button class="btn btn-success " name="select" type="submit" style="margin-left: .75em;">Select</button>
-    </form>
-</div>
+
 
 
 <?php 
@@ -340,38 +335,55 @@ switch ($_POST['tables']) {
 /////////////////////////////////////USERS////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////////////////////////// -->
 
+<div class="row">
+<div class="col-3">
 
+
+
+<div class="container row d-grid gap-3">
+
+<div class="col-md-12 col-lg-12 col-xl-12 p-2">
+    <form action="admin.php" method="POST" >
+        <select name="tables" class="form-control col-8" id="" style="height:6vh ; display: inline-block; ">
+            <option value="usersTable">Users Table</option>
+            <option value="productsTable">Products Table</option>
+            <option value="categoriesTable">Categories Table</option>
+            <option value="salesTable">Sales Table</option>
+        </select>
+        <button class="btn btn-success " name="select" type="submit" style="margin-left: .75em;">Select</button>
+    </form>
+</div>
 
 <!-- add user button -->
-<div class="container row">
-<div class="col-3 offset-3">
+<div class="col-12 p-2 bg-light border">
 <form action="admin.php" method="POST" >
-<button class="btn bg-info" type="submit" name="addUserSub">Add User</button>
+<button class="btn bg-light" type="submit" name="addUserSub">Add User</button>
 </form>
 </div>
 
 
 <!-- add product button -->
-<div class="col-3">
+<div class="col-12 p-2 bg-light border">
 <form action="admin.php" method="POST">
-<button class="btn bg-info" type="submit" name="addProductSub">Add Product</button>
+<button class="btn bg-light" type="submit" name="addProductSub">Add Product</button>
 </form>
 </div>
 <!-- add category button -->
-<div class="col-3">
+<div class="col-12 p-2 bg-light border">
 <form action="admin.php" method="POST" >
-<button class="btn bg-info" type="submit" name="addCatSub">Add Category</button>
+<button class="btn bg-light" type="submit" name="addCatSub">Add Category</button>
 </form>
 </div>
 </div>
-<br>
+</div>
 
 
+<div class="col-6">
 <!-- Users Information Table -->
 <div class="container">
 <table class="table" style="display:<?php echo $utF; ?> ;">
 <h1 style="display:<?php echo $utF; ?> ;">Users Information</h1>
-    <tr class='bg-active' style="background-color:pink;">
+    <tr class='bg-active' style="background-color:#E9D5DA;">
         <td>ID</td>
         <td>Name</td>
         <td>E-mail</td>
@@ -422,25 +434,25 @@ switch ($_POST['tables']) {
 <!-- Update User Info Form -->
 <form class="container" action="admin.php" method="POST" style="display:<?php echo $uF; ?> ;">
 <div class="form-row" >
-    <div class="form-group col-md-3">
+    <div class="form-group col-12">
     <label for="uname">update name</label> 
     <input type="text" id='uname' class="form-control" name="userName" placeholder="update name">
     </div>
-    <div class="form-group col-md-3">
+    <div class="form-group col-12">
     <label for="uemail">update email</label>
     <input type="email" id='uemail' class="form-control" name="userEmail" placeholder="update email">
     </div> 
-    <div class="form-group col-md-3 ">
+    <div class="form-group col-12">
     <label for="uphone">update phone</label>
     <input type="number" id='uphone' class="form-control" name="userPhone" placeholder="update phone">
     </div>
-    <div class="form-group col-md-2 ">
+    <div class="form-group col-12">
     <label for="upass">userPass</label>
     <input type="password" id='upass' class="form-control" name="userPass" placeholder="update password">
     </div>
     <br>
     </div>
-    <div class="col-md-2 offset-col-4">
+    <div class="col-12 offset-col-4">
     <button type="submit" class="btn btn-success" name="updateUserSubmit">Update</button>
     </div>
 </form>
@@ -450,31 +462,31 @@ switch ($_POST['tables']) {
 <!-- ADD User Form -->
 <form class="container" action="admin.php" method="POST" style="display:<?php echo $uaF; ?> ;">
 <div class="form-row" >
-    <div class="form-group col-md-3">
+    <div class="form-group col-12">
     <label for="addName">Name</label> 
     <input type="text" id='addName' class="form-control" name="userAddName" placeholder="Name">
     </div>
-    <div class="form-group col-md-3">
+    <div class="form-group col-12">
     <label for="addEmail">E-mail</label>
     <input type="email" id='addEmail' class="form-control" name="userAddEmail" placeholder="test@test.com">
     </div> 
-    <div class="form-group col-md-3 ">
+    <div class="form-group col-12">
     <label for="addPhone">Phone</label>
     <input type="number" id='addPhone' class="form-control" name="userAddPhone" placeholder="#########">
     </div>
-    <div class="form-group col-md-2 ">
+    <div class="form-group col-12">
     <label for="addPass">user Password</label>
     <input type="password" id='addPass' class="form-control" name="userAddPass" placeholder="***********">
     </div>
     <br>
-    <div class="form-group ">
-    <label for="admin">Admin ?</label>
-    <input type="checkbox" id='admin' class="form-control" name="userAdmin" >
+    <div class="form-group row col-4">
+    <div class="offset-1"><label for="admin">Admin ?</label></div>
+    <div class="offset-1"><input type="checkbox" id='admin' class="" name="userAdmin"></div>
     </div>
     <br>
-    </div>
-    <div class="col-md-2 offset-col-4">
+    <div class="form-group col-12 offset-col-4">
     <button type="submit" class="btn btn-success" name="addUserSubmit">Add user</button>
+    </div>
     </div>
 </form>
 <!-- End Of Add User Form -->
@@ -489,32 +501,32 @@ switch ($_POST['tables']) {
 <!-- Add Product Form -->
 <form action="admin.php" method="POST" class="container" enctype="multipart/form-data" style="display:<?php echo $paF; ?> ;">
 <div class="form-row">
-    <div class="form-group col-md-2">
+    <div class="form-group col-12">
     <label for="paname">product Name</label>
-    <input type="text" id='paname' name="productAddName" placeholder="name">
+    <input type="text" id='paname' name="productAddName" class="form-control" placeholder="name">
     </div>
-    <div class="form-group col-md-3 ">
+    <div class="form-group col-12">
     <label for="paimg">Product Image</label>
-    <input type="file" name="file" id="file">
+    <input type="file" name="file" id="file" class="form-control">
     </div>
-    <div class="form-group col-md-2 ">
+    <div class="form-group col-12">
     <label for="paprice">Product Price</label>
-    <input type="text" id='paprice' name="productAddPrice" placeholder="Price">
+    <input type="text" id='paprice' name="productAddPrice" class="form-control" placeholder="Price">
     </div>
-    <div class="form-group col-md-2 ">
+    <div class="form-group col-12">
     <label for="paquantity">Product Quantity</label>
-    <input type="text" id='paquantity' name="productAddQuantity" placeholder="Quantity">
+    <input type="text" id='paquantity' name="productAddQuantity" class="form-control" placeholder="Quantity">
     </div>
-    <div class="form-group col-md-2">
+    <div class="form-group col-12">
     <label for="paCate">Product Category</label>
-    <select class="form-group col-md-2"  id='paCate' name="productAddCategory">
+    <select class="form-group col-4 form-control"  id='paCate' name="productAddCategory" style="height:6vh ;">
     <?php foreach($category as $key => $name): ?>
     <option value="<?php echo $name['category_id']; ?>"><?php echo $name['categoryname'];?></option>
     <?php endforeach; ?>
     </select>
     </div>
     
-    <div class="form-group col-md-2 ">
+    <div class="form-group col-12">
     <button type="submit" class="btn btn-success" name="addProductSubmit">Add</button>
     </div>
     </div>
@@ -529,7 +541,7 @@ switch ($_POST['tables']) {
 <div class="container">
 <table class="table" style="display:<?php echo $ptF; ?> ;">
 <h1 style="display:<?php echo $ptF; ?> ;">Products Information</h1>
-    <tr class='' style="background-color:pink;">
+    <tr class='' style="background-color:#E9D5DA;">
         <td>Id</td>
         <td>Product name</td>
         <td>Image</td>
@@ -580,29 +592,32 @@ switch ($_POST['tables']) {
 <!-- Update Product Info Form -->
 <form action="admin.php" method="POST" class="container" style="display:<?php echo $pF; ?> ;">
 <div class="form-row">
-    <div class="form-group col-md-2">
+    <div class="form-group col-12">
     <label for="pname">productName</label>
-    <input type="text" id='pname' name="productName" placeholder="update name">
+    <input type="text" id='pname' name="productName" class="form-control" placeholder="update name">
     </div>
-    <div class="form-group col-md-2">
+    <div class="form-group col-12">
     <label for="pCate">productCategory</label>
-    <input type="text" id='pCate' name="productCategory" placeholder="update Category">
+    <input type="text" id='pCate' name="productCategory" class="form-control" placeholder="update Category">
     </div>
-    <div class="form-group col-md-2 ">
+    <div class="form-group col-12">
     <label for="pimg">productImage</label>
-    <input type="text" id='pimg' name="productImage" placeholder="update Image">
+    <input type="text" id='pimg' name="productImage" class="form-control" placeholder="update Image">
     </div>
-    <div class="form-group col-md-2 ">
+    <div class="form-group col-12">
     <label for="pprice">productPrice</label>
-    <input type="text" id='pprice' name="productPrice" placeholder="update Price">
+    <input type="text" id='pprice' name="productPrice" class="form-control" placeholder="update Price">
     </div>
-    <div class="form-group col-md-2 ">
+    <div class="form-group col-12">
     <label for="pquantity">productQuantity</label>
-    <input type="text" id='pquantity' name="productQuantity" placeholder="update Quantity">
+    <input type="text" id='pquantity' name="productQuantity" class="form-control" placeholder="update Quantity">
+    </div>
+    <div class="form-group col-4 offset-4">
+    <button type="submit" class="btn btn-success form-control" name="productUpdatesubmit">Update</button>
     </div>
     </div>
 
-    <button type="submit" class="btn btn-info" name="productUpdatesubmit">Update</button>
+    
 </form>
 <!-- End Of Update Product Info Form -->
 
@@ -616,7 +631,7 @@ switch ($_POST['tables']) {
 <div class="container">
 <table class="table" style="display:<?php echo $ctF; ?> ;">
 <h1 style="display:<?php echo $ctF; ?> ;">Categories Information</h1>
-    <tr class='' style='background-color:pink;'>
+    <tr class='' style='background-color:#E9D5DA;'>
         <th>ID</th>
         <th>Category Name</th>
         <th>Created at</th>
@@ -669,7 +684,7 @@ switch ($_POST['tables']) {
     <br>
     </div>
     <div class="col-md-2 offset-col-4">
-    <button type="submit" class="btn btn-primary" name="updateCatSubmit">Update</button>
+    <button type="submit" class="btn btn-success" name="updateCatSubmit">Update</button>
     </div>
 </form>
 <!-- End Of Update Categories Info Form -->
@@ -695,7 +710,7 @@ switch ($_POST['tables']) {
 <div class="container">
 <table class="table" style="display:<?php echo $stF; ?> ;">
     <h1 style="display:<?php echo $stF; ?> ;">Sales Information</h1>
-    <tr style="background-color:pink;">
+    <tr style="background-color:#E9D5DA;">
         <th>order Id</th>
         <th>Product name</th>
         <th>Image</th>
@@ -719,5 +734,6 @@ switch ($_POST['tables']) {
         ?>
         <?php endforeach; ?>
 </table>
+</div>
 </div>
 <!-- End of Sales table -->
